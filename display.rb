@@ -18,6 +18,10 @@ module Display
     TOP_LEFT + HOR * 2 + T_DOWN + HOR * 13 + T_DOWN + HOR * 9 + TOP_RIGHT
   end
 
+  def code_top_row
+    TOP_LEFT + HOR * 13 + TOP_RIGHT
+  end
+
   def middle_row
     T_RIGHT + HOR * 2 + T_ALL + HOR * 13 + T_ALL + HOR * 9 + T_LEFT
   end
@@ -25,12 +29,20 @@ module Display
   def bottom_row
     BOTTOM_LEFT + HOR * 2 + T_UP + HOR * 13 + T_UP + HOR * 9 + BOTTOM_RIGHT
   end
+  def code_bottom_row
+    BOTTOM_LEFT + HOR * 13 + BOTTOM_RIGHT
+  end
 
   def game_row(pegs, keys, number)
     pegs = pegs.map { |str| get_peg(str) }
     keys = keys.map { |str| get_key(str) }
     number_strings = number < 10 ? " #{number}" : number.to_s
     VER + number_strings + VER + ' ' + pegs.join('  ') + '  ' + VER + ' ' + keys.join(' ') + ' ' + VER
+  end
+
+  def code_row(pegs)
+    pegs = pegs.map { |str| get_peg(str) }
+    VER + ' ' + pegs.join('  ') + '  ' + VER
   end
 
   def get_peg(color = 'empty')
